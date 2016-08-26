@@ -1,0 +1,33 @@
+---
+
+- include: security.yml
+
+- include: install-dseg.yml
+
+- name: "log folder for {{app_install_dir}}"
+  file:
+    path: /var/log/{{app_install_dir}}
+    state: directory
+    owner: "{{dseg_user_name}}"
+    group: "{{dseg_group_name}}"
+
+- name: Copy over upstart script
+  template:
+    src: upstart.conf
+    dest: /etc/init/{{app_service_name}}.conf
+
+- name: Copy over startup script
+  template:
+    src: startup.sh
+    dest: /usr/local/{{app_install_dir}}/startup.sh
+
+- name: "Set ownership of {{app_install_dir}} directory"
+  file:
+    path: /usr/local/{{app_install_dir}}
+    state: directory
+    owner: "{{dseg_user_name}}"
+    group: "{{dseg_group_name}}"
+    mode: 0755
+    recurse: yes
+
+- include: consul-health.yml

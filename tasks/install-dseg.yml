@@ -1,0 +1,26 @@
+---
+
+- name: Create staging folder for DataStax Enterprise Graph to install from
+  file:
+    path: "/usr/local/{{app_install_dir}}/downloads"
+    state: directory
+    owner: "{{dseg_user_name}}"
+    group: "{{dseg_group_name}}"
+    mode: 0750
+
+- name: Copy over shiro security configuration
+  copy:
+    src: DataStaxEnterprise-5.0.1-linux-x64-installer.run
+    path: "/usr/local/{{app_install_dir}}/downloads/DataStaxEnterprise-installer.run"
+    owner: "{{dseg_user_name}}"
+    group: "{{dseg_group_name}}"
+    mode: 0644
+
+- name: Create folder for DSE Graph data
+  file:
+    path: /var/lib/{{app_install_dir}}
+    state: directory
+    owner: "{{dseg_user_name}}"
+    group: "{{dseg_group_name}}"
+    mode: 0750
+

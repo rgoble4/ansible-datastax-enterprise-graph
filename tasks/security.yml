@@ -1,0 +1,10 @@
+---
+- name: "Add {{dseg_group_name}} group"
+  group: name={{dseg_group_name}} system=yes
+
+- name: "Add {{dseg_user_name}} user"
+  user:
+    name: "{{dseg_user_name}}"
+    group: "{{dseg_group_name}}"
+    system: yes
+

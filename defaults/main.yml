@@ -1,0 +1,7 @@
+---
+app_port: 8080
+dseg_group_name: datastax-enterprise-graph
+dseg_user_name: datastax-enterprise-graph
+consul_service_name: datastax-enterprise-graph
+app_install_dir: datastax-enterprise-graph
+app_service_name: datastax-enterprise-graph
