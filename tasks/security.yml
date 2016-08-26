@@ -8,3 +8,5 @@
     group: "{{dseg_group_name}}"
     system: yes
 
+- pam_limits: domain=* limit_type=- limit_item=nofile value=128000
+- pam_limits: domain=* limit_type=- limit_item=nproc value=64000

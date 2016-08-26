@@ -1,26 +1,60 @@
 ---
 
-- name: Create staging folder for DataStax Enterprise Graph to install from
+- name: Download Datastax Enterprise Graph installer
+  get_url:
+    url: "https://s3.amazonaws.com/peoplenet-dse-graph/DataStaxEnterprise-5.0.1-linux-x64-installer.run"
+    dest: "/tmp/DataStaxEnterprise-5.0.1-linux-x64-installer.run"
+
+- name: Set execute permissions on installer
   file:
-    path: "/usr/local/{{app_install_dir}}/downloads"
-    state: directory
+    dest: "/tmp/DataStaxEnterprise-5.0.1-linux-x64-installer.run"
+    state: file
     owner: "{{dseg_user_name}}"
     group: "{{dseg_group_name}}"
     mode: 0750
-
-- name: Copy over shiro security configuration
-  copy:
-    src: DataStaxEnterprise-5.0.1-linux-x64-installer.run
-    path: "/usr/local/{{app_install_dir}}/downloads/DataStaxEnterprise-installer.run"
-    owner: "{{dseg_user_name}}"
-    group: "{{dseg_group_name}}"
-    mode: 0644
 
 - name: Create folder for DSE Graph data
   file:
-    path: /var/lib/{{app_install_dir}}
+    path: /var/lib/cassandra
     state: directory
     owner: "{{dseg_user_name}}"
     group: "{{dseg_group_name}}"
     mode: 0750
+
+- name: Copy over limits config
+  template:
+    src: limits.conf
+    dest: /etc/security/limits.d/cassandra-limits.conf
+
+- name: Copy over unattended response file
+  template:
+    src: dse-install-responses.prop
+    dest: /etc/dse-unattended-responses.prop
+
+- name: Run Installer
+  command: /tmp/DataStaxEnterprise-5.0.1-linux-x64-installer.run \
+               --mode unattended \
+               --optionfile /etc/dse-unattended-responses.prop
+  register: installerout
+
+- name: DSE Installer Standard Out
+  debug: msg="{{installerout.stdout}}"
+
+- name: DSE Installer Standard Error
+  debug: msg="{{installerout.stderr}}"
+
+- name: Configure cassandra to not listen on an address
+  lineinfile: "dest=/etc/dse/cassandra/cassandra.yaml regexp='^listen_address' state=absent"
+
+- name: Configure cassandra to not listen for RPC on an address
+  lineinfile: "dest=/etc/dse/cassandra/cassandra.yaml regexp='^rpc_address' state=absent"
+
+- name: Configure cassandra to listen on eth0
+  lineinfile: "dest=/etc/dse/cassandra/cassandra.yaml regexp='^listen_interface' line='listen_interface: eth0'"
+
+- name: Configure cassandra to listen for RPC on eth0
+  lineinfile: "dest=/etc/dse/cassandra/cassandra.yaml regexp='^rpc_interface' line='rpc_interface: eth0'"
+
+- name: Bundle up cassandra data folder
+  command: tar -cvzf /usr/local/var-lib-cassandra.tgz /var/lib/cassandra
 

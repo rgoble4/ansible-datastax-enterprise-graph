@@ -1,0 +1,19 @@
+- name: Copy over upstart script
+  template:
+    src: upstart.conf
+    dest: /etc/init/{{app_service_name}}-permissions.conf
+
+- name: Copy over permissions script
+  template:
+    src: set-permissions.sh
+    dest: /usr/local/{{app_install_dir}}/set-permissions.sh
+
+- name: "Set ownership of upstart script"
+  file:
+    dest: /usr/local/{{app_install_dir}}/set-permissions.sh
+    state: file
+    owner: root
+    group: root
+    mode: 0750
+
+

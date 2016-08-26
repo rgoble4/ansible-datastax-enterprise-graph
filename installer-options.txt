@@ -1,0 +1,154 @@
+DataStax Enterprise 5.0.1
+Usage:
+
+ --help                                                      Display the list of valid options
+
+ --version                                                   Display product information
+
+ --unattendedmodeui <unattendedmodeui>                       Unattended Mode UI
+                                                             Default: none
+                                                             Allowed: none minimal minimalWithDialogs
+
+ --optionfile <optionfile>                                   Installation option file
+                                                             Default:
+
+ --debuglevel <debuglevel>                                   Debug information level of verbosity
+                                                             Default: 2
+                                                             Allowed: 0 1 2 3 4
+
+ --mode <mode>                                               Installation mode
+                                                             Default: gtk
+                                                             Allowed: gtk xwindow text unattended
+
+ --debugtrace <debugtrace>                                   Debug filename
+                                                             Default:
+
+ --installer-language <installer-language>                   Language selection
+                                                             Default: en
+                                                             Allowed: sq ar es_AR az eu pt_BR bg ca hr cs da nl en et fi fr de el he hu id it ja kk ko lv lt no fa pl pt ro ru sr zh_CN sk sl es sv th zh_TW tr tk va vi cy
+
+ --system_install <system_install>                           Install as "services_and_utilities" or as a "no_services" setup
+                                                             Default: services_and_utilities (root user)
+                                                                      no_services (all other users, Mac OS-X(TM))
+
+ --install_type <install_type>                               Install in "simple" or "advanced" installer mode
+                                                             Default: simple
+
+ --prefix <prefix>                                           Installation directory
+                                                             Default: /usr/share/dse (service_and_utilities)
+                                                                      <home>/dse (not root user and Mac OS-X(TM))
+                                                                      <pwd> (if all other locations fail)
+
+ --interface <interface>                                     Default network interface
+                                                             Default: 172.29.200.212
+
+ --ring_name <ring_name>                                     Cassandra(TM) cluster name
+                                                             Default: Test Cluster
+
+ --seeds <seeds>                                             Seeds
+                                                             Default:
+
+ --developer_install <developer_install>                     Specify "1" to install developer related tools demos, Javadocs, DataStax Studio(TM) and the DSE Graph Loader. Specify "0" if you do not want these part installed.
+                                                             Default: 0 (root user)
+                                                                      1 (all other users, Mac OS-X(TM))
+
+ --do_drain <do_drain>                                       Specify "1" to drain the node before shutdown. Specify "0" to not drain the node.
+                                                             Default: 1
+
+ --enable_analytics <enable_analytics>                       Specify "1" to enable the DSE Analytics feature which provides integrated Analytics. Specify "0" to not enable this feature.
+                                                             Default: 0 (if developer_install is 0)
+                                                                      1 (if developer_install is 1)
+
+ --enable_search <enable_search>                             Specify "1" to enable the DSE Search feature which provides integrated Search. Specify "0" to not enable this feature.
+                                                             Default: 0 (if developer_install is 0)
+                                                                      1 (f developer_install is 1)
+
+ --enable_graph <enable_graph>                               Specify "1" to enable the DSE Graph feature which provides a native graph data model. Specify "0" to not enable this feature.
+                                                             Default: 0 (if developer_install is 0)
+                                                                      1 (if developer_install is 1)
+
+ --enable_advrepl <enable_advrepl>                           Specify "1" to enable DSE Advanced Replication for syncing of local data to a central Cassandra cluster. Specify "0" to not enable this feature.
+                                                             Default: 0 (if developer_install is 0)
+                                                                      1 (if developer_install is 1)
+
+ --num_tokens <num_tokens>                                   Number of tokens on this node
+                                                             Default: 128 (Cassandra, Analytics, Graph)
+                                                                      32 (Search)
+
+ --enable_vnodes <enable_vnodes>                             Specify "1" to enable virtual nodes. Specify "0" to disable virtual nodes.
+                                                             Default: 1 (Cassandra)
+                                                                      0 (Analytics, Search, Graph)
+
+ --listen_address <listen_address>                           Cassandra Listen address
+                                                             Default: 172.29.200.212
+
+ --rpc_address <rpc_address>                                 Cassandra RPC address
+                                                             Default: 172.29.200.212
+
+ --update_system <update_system>                             Specify "1" to update the Operating System. Specify "0" to not update the Operating System. The installer then installs missing OS packages. This requires admin rights, an internet connection, and will take some time.
+                                                             Default: 1 (root user)
+                                                                      0 (all other users, Mac OS-X(TM))
+
+ --start_services <start_services>                           Specify "1" to start services after installation. Specify "0" to not start the services.
+                                                             Default: 0
+
+ --analytics_type <analytics_type>                           Analytics type
+                                                             Default: spark_only
+                                                             Allowed: spark_only spark_integrated
+
+ --opscenter_address <opscenter_address>                     OpsCenter address
+                                                             Default:
+
+ --pfc_fix_issues <pfc_fix_issues>                           Attempt to fix issues found by PFC
+                                                             Default: 0
+
+ --pfc_ssd <pfc_ssd>                                         Test SSD drives (e.g. /dev/sda,/dev/sdb)
+                                                             Default:
+
+ --pfc_devices <pfc_devices>                                 Test drives (e.g. /dev/sda,/dev/sdb)
+                                                             Default:
+
+ --pfc_disk_duration <pfc_disk_duration>                     Time to run disk benchmarks (sec)
+                                                             Default: 30
+
+ --pfc_disk_threads <pfc_disk_threads>                       Threads per disk benchmark
+                                                             Default: 5
+
+ --run_pfc <run_pfc>                                         Specify "1" to run pre flight check. Specify "0" to not run it.
+                                                             Default: 0
+
+ --cassandra_user <cassandra_user>                           OS user id for service
+                                                             Default: cassandra
+
+ --cassandra_group <cassandra_group>                         OS user group for service
+                                                             Default: cassandra
+
+ --cassandra_data_dir <cassandra_data_dir>                   Cassandra data directory
+                                                             Default: /var/lib/cassandra/data (services_and_utilities)
+                                                                      <prefix>/data (no_services)
+
+ --cassandra_commitlog_dir <cassandra_commitlog_dir>         Cassandra commitlog directory
+                                                             Default: /var/lib/cassandra/commitlog (services_and_utilities)
+                                                                      <prefix>/commitlog (no_services)
+
+ --cassandra_saved_caches_dir <cassandra_saved_caches_dir>   Cassandra saved caches directory
+                                                             Default: /var/lib/cassandra/saved_caches (services_and_utilities)
+                                                                      <prefix>/saved_caches (no_services)
+
+ --cassandra_hints_dir <cassandra_hints_dir>                 Cassandra hints directory
+                                                             Default: /var/lib/cassandra/hints (services_and_utilities)
+                                                                      <prefix>/hints (no_services)
+
+ --logs_dir <logs_dir>                                       Logs directory
+                                                             Default: /var/log/cassandra (services_and_utilities)
+                                                                      <prefix>/logs (no_services)
+
+ --storage_port <storage_port>                               Cassandra storage port
+                                                             Default: 7000
+
+ --ssl_storage_port <ssl_storage_port>                       Cassandra SSL storage port
+                                                             Default: 7001
+
+ --rpc_port <rpc_port>                                       Cassandra RPC port
+                                                             Default: 9160
+
