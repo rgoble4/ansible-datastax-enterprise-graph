@@ -2,12 +2,12 @@
 
 - name: Download Datastax Enterprise Graph installer
   get_url:
-    url: "https://s3.amazonaws.com/peoplenet-dse-graph/DataStaxEnterprise-5.0.1-linux-x64-installer.run"
-    dest: "/tmp/DataStaxEnterprise-5.0.1-linux-x64-installer.run"
+    url: "https://s3.amazonaws.com/peoplenet-dse-graph/DataStaxEnterprise-5.0.3-linux-x64-installer.run"
+    dest: "/tmp/DataStaxEnterprise-5.0.3-linux-x64-installer.run"
 
 - name: Set execute permissions on installer
   file:
-    dest: "/tmp/DataStaxEnterprise-5.0.1-linux-x64-installer.run"
+    dest: "/tmp/DataStaxEnterprise-5.0.3-linux-x64-installer.run"
     state: file
     owner: "{{dseg_user_name}}"
     group: "{{dseg_group_name}}"
@@ -32,7 +32,7 @@
     dest: /etc/dse-unattended-responses.prop
 
 - name: Run Installer
-  command: /tmp/DataStaxEnterprise-5.0.1-linux-x64-installer.run \
+  command: /tmp/DataStaxEnterprise-5.0.3-linux-x64-installer.run \
                --mode unattended \
                --optionfile /etc/dse-unattended-responses.prop
   register: installerout

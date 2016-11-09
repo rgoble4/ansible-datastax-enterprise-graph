@@ -1,4 +1,4 @@
-DataStax Enterprise 5.0.1
+DataStax Enterprise 5.0.3
 Usage:
 
  --help                                                      Display the list of valid options
