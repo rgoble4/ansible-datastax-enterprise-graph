@@ -2,6 +2,7 @@
 app_port: 8080
 dseg_group_name: cassandra
 dseg_user_name: cassandra
+dseg_version: 5.0.4
 consul_service_name: dse-graph
 app_install_dir: dse
 app_service_name: dse
