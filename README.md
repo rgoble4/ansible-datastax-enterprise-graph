@@ -1,5 +1,5 @@
 Ansible Datastax Enterprise Graph Role
 =======================
 
-Installs Datastax Enterprise Graphe and an upstart task
+Installs Datastax Enterprise Graph and an upstart task
 
